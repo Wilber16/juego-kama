@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0c0507">
+<title>Juego Kama · 20 posturas para parejas +18</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
+:root{--bg:#0c0507;--line:#4a1c26;--red:#d7263d;--red2:#ff4d6d;--gold:#f0c27b;--cream:#fff1ec;--muted:#c29aa3}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{background:radial-gradient(ellipse at 50% -20%,#5a0f1f 0,transparent 60%),radial-gradient(ellipse at 100% 110%,#3a0a18 0,transparent 50%),var(--bg);color:var(--cream);font-family:'DM Sans',system-ui,sans-serif;min-height:100svh}
+button{font:inherit;color:inherit;cursor:pointer}
+.app{max-width:520px;margin:auto;padding:18px 16px 90px}
+.logo{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;text-align:center;margin:6px 0 2px}
+.logo em{color:var(--red2);font-style:italic}
+.sub{text-align:center;color:var(--muted);font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+.chips{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.chip{border:1px solid #7a2c3b;background:#1d0a0f;border-radius:30px;padding:7px 10px;font-size:11.5px;font-weight:800}
+.chip.on{background:var(--gold);color:#2a0c12;border-color:var(--gold)}
+.legend{display:flex;gap:16px;justify-content:center;font-size:12px;color:var(--muted);margin-bottom:12px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.view{display:none}.view.on{display:block;animation:fade .35s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+.btn{width:100%;border:0;border-radius:14px;padding:15px;font-weight:800;font-size:15px;transition:transform .12s}
+.btn:active{transform:scale(.97)}
+.red{background:linear-gradient(100deg,#b0102a,#ff4d6d);color:#fff;box-shadow:0 8px 30px #d7263d40}
+.ghost{background:#2a0f16;border:1px solid var(--line)}
+/* ficha */
+.pose{border-radius:24px;border:1.5px solid #8a2f42;background:radial-gradient(circle at 50% 0%,#4a1020,#1a070c 70%);box-shadow:0 20px 60px #000a;overflow:hidden}
+.pose .art{background:#12060a;border-bottom:1px solid var(--line);padding:6px}
+.pose .art svg{display:block;width:100%;height:auto}
+.pose .body{padding:16px 18px 18px}
+.pose .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.pose h2{font-family:'Playfair Display',serif;font-size:26px;margin:0}
+.lvl{font-size:11px;font-weight:800;border-radius:30px;padding:6px 10px;white-space:nowrap}
+.l1{background:#2b3a1d;color:#cfe8a5}.l2{background:#4a3410;color:#f6cf86}.l3{background:#5a1020;color:#ffb3c1}
+.pose ol{margin:12px 0 10px;padding-left:20px}
+.pose li{margin-bottom:6px;line-height:1.5;font-size:15px;color:#f3dde1}
+.tip{background:#24090f;border-left:3px solid var(--gold);padding:10px 12px;border-radius:8px;font-size:13px;line-height:1.5;color:#ecd3d8}
+.reto{margin-top:12px;background:linear-gradient(100deg,#5a0f1f,#2a0a12);border:1px solid var(--red2);border-radius:12px;padding:12px;text-align:center;font-weight:800}
+.reto small{display:block;font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:4px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.act{border:1px solid #7a2c3b;background:#1d0a0f;border-radius:12px;padding:11px 6px;font-size:13px;font-weight:800}
+.act.on{background:#4a1020;border-color:var(--red2)}
+.timer{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;background:#12060a;border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+.timer .clock{font-variant-numeric:tabular-nums;font-size:26px;font-weight:800;min-width:76px}
+.timer .opts{display:flex;gap:5px}
+.timer .opts button,.timer .go{border:1px solid #7a2c3b;background:#1d0a0f;border-radius:20px;padding:7px 9px;font-size:12px;font-weight:800}
+.timer .opts button.on{background:var(--gold);color:#2a0c12}
+.timer .go{background:var(--red);border-color:var(--red);color:#fff}
+.timer.done .clock{color:var(--red2);animation:pulse .6s 3}
+@keyframes pulse{50%{transform:scale(1.2)}}
+.nav{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+/* ruleta */
+.spin{text-align:center;padding:26px 10px}
+.spin .name{font-family:'Playfair Display',serif;font-size:30px;min-height:44px;color:var(--gold);margin:12px 0 18px}
+.spin .name.rolling{color:var(--muted);filter:blur(.5px)}
+.spin .big{font-size:60px}
+/* lista */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mini{border:1px solid var(--line);background:#14070b;border-radius:16px;overflow:hidden;text-align:left;padding:0}
+.mini svg{display:block;width:100%;height:auto;background:#12060a}
+.mini div{padding:8px 10px;font-size:13px;font-weight:800;display:flex;justify-content:space-between;gap:6px}
+.mini span{font-size:11px;color:var(--muted);font-weight:700}
+.empty{text-align:center;color:var(--muted);padding:40px 10px;line-height:1.6}
+/* barra inferior */
+.tabs{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;background:#0c0507ee;border-top:1px solid var(--line);backdrop-filter:blur(8px);padding:8px 8px calc(8px + env(safe-area-inset-bottom));z-index:5}
+.tabs div{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:100%;max-width:520px}
+.tabs button{background:none;border:0;border-radius:12px;padding:8px 4px;font-size:12px;font-weight:800;color:var(--muted)}
+.tabs button span{display:block;font-size:20px}
+.tabs button.on{color:var(--cream);background:#2a0f16}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#2a0f16;border:1px solid var(--gold);padding:10px 16px;border-radius:30px;font-size:13px;font-weight:700;opacity:0;transition:opacity .3s;pointer-events:none;z-index:10;white-space:nowrap}
+.toast.on{opacity:1}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="app">
+  <div class="logo">Juego <em>Kama</em></div>
+  <div class="sub">20 posturas para dos · Solo adultos</div>
+  <div class="chips" id="levels">
+    <button class="chip on" data-l="0">Todas</button>
+    <button class="chip" data-l="1">Fácil</button>
+    <button class="chip" data-l="2">🌶️ Medio</button>
+    <button class="chip" data-l="3">🔥 Atrevido</button>
+  </div>
+  <div class="legend"><span><i style="background:#f0c27b"></i>Él</span><span><i style="background:#ff5c7a"></i>Ella</span></div>
+
+  <!-- RULETA -->
+  <section class="view on" id="vSpin">
+    <div class="spin pose" id="spinBox">
+      <div class="big">🎰</div>
+      <div class="name" id="spinName">¿Qué toca hoy?</div>
+      <button class="btn red" id="spinBtn">Girar la ruleta</button>
+      <label style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;font-size:13px;color:var(--muted)">
+        <input type="checkbox" id="retoMode" style="width:18px;height:18px;accent-color:#ff4d6d" checked> Modo reto: añadir un desafío extra
+      </label>
+    </div>
+  </section>
+
+  <!-- FICHA -->
+  <section class="view" id="vPose"></section>
+
+  <!-- LISTA -->
+  <section class="view" id="vList"><div class="grid" id="grid"></div></section>
+</main>
+
+<nav class="tabs"><div>
+  <button class="on" data-v="vSpin"><span>🎰</span>Ruleta</button>
+  <button data-v="vList" data-f="all"><span>📖</span>Todas</button>
+  <button data-v="vList" data-f="fav"><span>❤️</span>Favoritas</button>
+</div></nav>
+<div class="toast" id="toast"></div>
+
+<script src="poses.js"></script>
+<script>
+const RETOS=[
+ 'Sin dejar de besarse ni un segundo',
+ 'Muy, muy lento',
+ 'Con los ojos de ella vendados',
+ 'Con los ojos de él vendados',
+ 'Ella marca el ritmo',
+ 'Él marca el ritmo',
+ 'Mirándose a los ojos todo el tiempo',
+ 'Sin hacer ni un ruido',
+ 'Frente a un espejo',
+ 'Con su canción favorita de fondo',
+ 'Susurrándose lo que sienten',
+ 'Cambien a otra habitación'
+];
+const LV={1:['🌶️ Fácil','l1'],2:['🌶️🌶️ Medio','l2'],3:['🌶️🌶️🌶️ Atrevido','l3']};
+const $=s=>document.querySelector(s);
+const store={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let favs=new Set(store.get('kama_favs',[])), tried=new Set(store.get('kama_tried',[]));
+let level=0, current=null, listMode='all', seen=new Set(), timer=null;
+const rand=a=>a[Math.floor(Math.random()*a.length)];
+const pool=()=>POSES.map((p,i)=>i).filter(i=>!level||POSES[i].lvl===level);
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2000)}
+function fmt(s){return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+
+function go(v){
+  stopTimer();
+  document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on',x.id===v));
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.v===v&&(v!=='vList'||b.dataset.f===listMode)));
+  scrollTo(0,0);
+}
+
+/* ---- ficha de una postura ---- */
+function openPose(i,reto){
+  current=i;const p=POSES[i];
+  $('#vPose').innerHTML=`<div class="pose">
+    <div class="art">${poseSVG(p)}</div>
+    <div class="body">
+      <div class="top"><h2>${p.name}</h2><span class="lvl ${LV[p.lvl][1]}">${LV[p.lvl][0]}</span></div>
+      <ol>${p.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+      <div class="tip">💡 ${p.tip}</div>
+      ${reto?`<div class="reto"><small>RETO EXTRA</small>🔥 ${reto}</div>`:''}
+      <div class="timer" id="tm">
+        <div class="clock">2:00</div>
+        <div class="opts">${[1,2,3,5].map(m=>`<button data-m="${m}" class="${m===2?'on':''}">${m}′</button>`).join('')}</div>
+        <button class="go">▶</button>
+      </div>
+      <div class="actions">
+        <button class="act ${favs.has(i)?'on':''}" id="favBtn">${favs.has(i)?'❤️ Favorita':'🤍 Favorita'}</button>
+        <button class="act ${tried.has(i)?'on':''}" id="triedBtn">${tried.has(i)?'✅ Probada':'☐ La probamos'}</button>
+      </div>
+      <div class="nav">
+        <button class="btn ghost" id="prevBtn">‹ Anterior</button>
+        <button class="btn red" id="nextBtn">🎰 Otra al azar</button>
+      </div>
+    </div></div>`;
+  $('#favBtn').onclick=()=>{favs.has(i)?favs.delete(i):favs.add(i);store.set('kama_favs',[...favs]);toast(favs.has(i)?'❤️ Añadida a favoritas':'Quitada de favoritas');openPose(i,reto)};
+  $('#triedBtn').onclick=()=>{tried.has(i)?tried.delete(i):tried.add(i);store.set('kama_tried',[...tried]);openPose(i,reto)};
+  $('#prevBtn').onclick=()=>{const l=pool(),k=l.indexOf(i);openPose(l[(k-1+l.length)%l.length]??i)};
+  $('#nextBtn').onclick=()=>{go('vSpin');spin()};
+  bindTimer();
+  go('vPose');
+}
+
+/* ---- temporizador ---- */
+function stopTimer(){if(timer){clearInterval(timer);timer=null}}
+function beep(){
+  try{navigator.vibrate&&navigator.vibrate([400,150,400,150,400])}catch(e){}
+  try{const a=new(window.AudioContext||window.webkitAudioContext)();[0,.3,.6].forEach(t=>{const o=a.createOscillator(),g=a.createGain();o.frequency.value=880;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(.25,a.currentTime+t);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+t+.25);o.start(a.currentTime+t);o.stop(a.currentTime+t+.26)})}catch(e){}
+}
+function bindTimer(){
+  const box=$('#tm'),clock=box.querySelector('.clock'),goBtn=box.querySelector('.go');
+  let total=120,left=120,running=false;
+  box.querySelectorAll('.opts button').forEach(b=>b.onclick=()=>{
+    stopTimer();running=false;goBtn.textContent='▶';box.classList.remove('done');
+    box.querySelectorAll('.opts button').forEach(x=>x.classList.toggle('on',x===b));
+    total=left=+b.dataset.m*60;clock.textContent=fmt(left);
+  });
+  goBtn.onclick=()=>{
+    if(left<=0){left=total;box.classList.remove('done')}
+    if(running){stopTimer();running=false;goBtn.textContent='▶';return}
+    running=true;goBtn.textContent='⏸';
+    timer=setInterval(()=>{left--;clock.textContent=fmt(Math.max(left,0));
+      if(left<=0){stopTimer();running=false;goBtn.textContent='↺';box.classList.add('done');beep();toast('⏰ ¡Tiempo! Cambien de postura')}},1000);
+  };
+}
+
+/* ---- ruleta ---- */
+function spin(){
+  let l=pool().filter(i=>!seen.has(i));
+  if(!l.length){seen.clear();l=pool();toast('🔄 Ya salieron todas: volvemos a empezar')}
+  const pick=rand(l);seen.add(pick);
+  const name=$('#spinName'),btn=$('#spinBtn');btn.disabled=true;name.classList.add('rolling');
+  let n=0;const steps=16;
+  (function tick(){
+    name.textContent=POSES[rand(pool())].name;n++;
+    if(n<steps)setTimeout(tick,50+n*12);
+    else{name.classList.remove('rolling');name.textContent=POSES[pick].name;btn.disabled=false;
+      setTimeout(()=>openPose(pick,$('#retoMode').checked?rand(RETOS):null),500)}
+  })();
+}
+$('#spinBtn').onclick=spin;
+
+/* ---- lista ---- */
+function renderList(){
+  const l=pool().filter(i=>listMode==='all'||favs.has(i));
+  $('#grid').innerHTML=l.length?l.map(i=>`<button class="mini" data-i="${i}">${poseSVG(POSES[i])}<div>${POSES[i].name}<span>${favs.has(i)?'❤️':''}${tried.has(i)?'✅':''}</span></div></button>`).join('')
+    :`<div class="empty" style="grid-column:1/-1">${listMode==='fav'?'Aún no tienen favoritas.<br>Toquen 🤍 en una postura para guardarla aquí.':'No hay posturas en este nivel.'}</div>`;
+  $('#grid').querySelectorAll('.mini').forEach(b=>b.onclick=()=>openPose(+b.dataset.i));
+}
+
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  if(b.dataset.v==='vList'){listMode=b.dataset.f;renderList()}
+  go(b.dataset.v);
+});
+document.querySelectorAll('#levels .chip').forEach(c=>c.onclick=()=>{
+  level=+c.dataset.l;seen.clear();
+  document.querySelectorAll('#levels .chip').forEach(x=>x.classList.toggle('on',x===c));
+  if($('#vList').classList.contains('on'))renderList();
+});
+</script>
+</body>
+</html>
